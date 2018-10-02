@@ -8,56 +8,56 @@ namespace Linq
 {
     class PostGreSQLExpressionTreeVisitor : ExpressionTreeVisitor
     {
-        public Type SourceType { get; private set; }
-        StringBuilder _postGreSQLString = new StringBuilder();
+        private StringBuilder _postGreSQLString = new StringBuilder();
 
-        private bool _startedSelect = false;
+        public Type SourceType { get; private set; }
 
         public override Expression Visit(Expression e)
         {
-            if (e != null)
-            {
-                //Console.WriteLine(e.NodeType + "!!!!");
-            }
             return base.Visit(e);
         }
 
         //.Where, .Select usw usw
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
-            if (m.Method.Name == "Where" && m.Arguments[0].NodeType == ExpressionType.Constant)
+            if (m.Method.Name == "Where")
             {
-                var ce = (ConstantExpression)m.Arguments[0];
-                var t = ce.Type;
-                if (t.GetGenericTypeDefinition() == typeof(DemoLinq<>))
+                if (m.Arguments[0].NodeType == ExpressionType.Constant)
                 {
-                    var tt = t.GenericTypeArguments[0];
-                    if (tt != SourceType && SourceType != null)
+                    var ce = (ConstantExpression)m.Arguments[0];
+                    var t = ce.Type;
+                    if (t.GetGenericTypeDefinition() == typeof(DemoLinq<>))
                     {
-                        throw new InvalidOperationException("Mixing tables not allowed");
+                        var tt = t.GenericTypeArguments[0];
+                        if (tt != SourceType && SourceType != null)
+                        {
+                            throw new InvalidOperationException("Mixing tables not allowed");
+                        }
+                        else
+                        {
+                            this.SourceType = tt;
+                        }
                     }
-                    else if (tt == SourceType && SourceType != null)
-                    {
-                        _postGreSQLString.Append("AND");
-                    }
-                    else
-                    {
-                        this.SourceType = tt;
-                        _postGreSQLString.Append("WHERE ");
-                        _startedSelect = true;
-                    }
+                _postGreSQLString.Append("WHERE ");
                 }
             }
+            Console.WriteLine(m.Method.Name);
             return base.VisitMethodCall(m);
         }
+
+
         protected override Expression VisitLambda(LambdaExpression lambda)
         {
-            //Look for second 
-            if (_startedSelect)
+            if (lambda.Body.NodeType == ExpressionType.Equal)
             {
                 _postGreSQLString.Append(" AND ");
             }
-            return base.VisitLambda(lambda);
+            Expression x = base.VisitLambda(lambda);
+            if (lambda.Body.NodeType == ExpressionType.AndAlso)
+            {
+                _postGreSQLString.Append(" " + NodeTypeToString(lambda.Body.NodeType) + " ");
+            }
+            return x;
         }
 
 
@@ -73,7 +73,6 @@ namespace Linq
 
         protected override ParameterExpression VisitParameter(ParameterExpression p)
         {
-            //_postGreSQLString.Append("Param: " + p. + " <-------");
             return base.VisitParameter(p);
         }
 
@@ -101,59 +100,33 @@ namespace Linq
 
         private String NodeTypeToString (ExpressionType e)
         {
-            string s = "";
-
-            //ToDo: Make switch case;
-
-            if (e.Equals(ExpressionType.Add)){
-                s = "+";
-            }
-            else if (e.Equals(ExpressionType.Subtract))
+            switch (e)
             {
-                s = "-";
-            }
-            else if(e.Equals(ExpressionType.And))
-            {
-                s = "AND";
-            }
-            else if(e.Equals(ExpressionType.AndAlso))
-            {
-                s = "AND";
-            }
-            else if(e.Equals(ExpressionType.Or))
-            {
-                s = "OR";
-            }
-            else if(e.Equals(ExpressionType.OrElse))
-            {
-                s = "OR";
-            }
-            else if(e.Equals(ExpressionType.LessThan))
-            {
-                s = "<";
-            }
-            else if(e.Equals(ExpressionType.LessThanOrEqual))
-            {
-                s = "<=";
-            }
-            else if(e.Equals(ExpressionType.GreaterThan))
-            {
-                s = ">";
-            }
-            else if(e.Equals(ExpressionType.GreaterThanOrEqual))
-            {
-                s = ">=";
-            }
-            else if(e.Equals(ExpressionType.Equal))
-            {
-                s = "=";
-            }
-            else if (e.Equals(ExpressionType.NotEqual))
-            {
-                s = "<>";
+                case ExpressionType.Add:
+                    return "+";
+                case ExpressionType.Subtract:
+                    return "-";
+                case ExpressionType.And:
+                case ExpressionType.AndAlso:
+                    return "AND";
+                case ExpressionType.Or:
+                case ExpressionType.OrElse:
+                    return "OR";
+                case ExpressionType.LessThan:
+                    return "<";
+                case ExpressionType.LessThanOrEqual:
+                    return "<=";
+                case ExpressionType.GreaterThan:
+                    return ">";
+                case ExpressionType.GreaterThanOrEqual:
+                    return ">=";
+                case ExpressionType.Equal:
+                    return "=";
+                case ExpressionType.NotEqual:
+                    return "<>";
             }
 
-            return s;
+            return "InvalidNodeTypeToString";
         }
 
         private string Member(string member)

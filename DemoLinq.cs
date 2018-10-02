@@ -72,6 +72,18 @@ namespace Linq
             var visitor = new PostGreSQLExpressionTreeVisitor();
             visitor.Visit(expression);
 
+            Console.Write("SELECT ");
+
+            //Select * but with names:
+            foreach(var x in visitor.SourceType.GetProperties())
+            {
+                Console.Write($"{visitor.SourceType.Name}.{x.Name}, ");
+            }
+
+            //from my table
+            Console.Write($"FROM {visitor.SourceType.Name} ");
+
+
             visitor.printSQL();
 
             return new MyTable[]
