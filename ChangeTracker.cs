@@ -7,14 +7,10 @@ namespace Linq
 {
     class ChangeTracker
     {
-       
-
-        private readonly List<ChangeTrackerEntry> _objects;
+        private static readonly List<ChangeTrackerEntry> _objects = new List<ChangeTrackerEntry>();
 
         public ChangeTracker()
         {
-            _objects = new List<ChangeTrackerEntry>();
-            
         }
 
         public List<ChangeTrackerEntry> DetectChanges()
@@ -61,6 +57,7 @@ namespace Linq
 
         public void ComputeChanges()
         {
+            var toBeDeleted = new List<ChangeTrackerEntry>();
             foreach (var obj in _objects)
             {
                 switch (obj.State)
@@ -69,12 +66,17 @@ namespace Linq
                         ComputeUpdate(obj);
                         break;
                     case ChangeTrackerEntry.States.Added:
-                        ComputeDelete(obj);
-                        break;
-                    case ChangeTrackerEntry.States.Deleted:
                         ComputeInsert(obj);
                         break;
+                    case ChangeTrackerEntry.States.Deleted:
+                        toBeDeleted.Add(obj);
+                        break;
                 }
+            }
+
+            for (int i = toBeDeleted.Count - 1; i >= 0; i--)
+            {
+                _objects.Remove(toBeDeleted[i]);
             }
         }
 
@@ -85,11 +87,6 @@ namespace Linq
                 originalValue.Item2 = originalValue.Item1.GetValue(entry.Item);
             }
             entry.State = ChangeTrackerEntry.States.Unmodified;
-        }
-
-        private void ComputeDelete(ChangeTrackerEntry entry)
-        {
-            _objects.Remove(entry);
         }
 
         private void ComputeInsert(ChangeTrackerEntry entry)

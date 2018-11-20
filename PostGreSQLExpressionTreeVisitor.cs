@@ -8,7 +8,7 @@ namespace Linq
 {
     class PostGreSqlExpressionTreeVisitor : ExpressionTreeVisitor
     {
-        private StringBuilder _postGreSqlString = new StringBuilder();
+        private readonly StringBuilder _postGreSqlString = new StringBuilder();
         private bool _firstWhereVisited = false;
 
         public Type SourceType { get; private set; }
@@ -116,11 +116,6 @@ namespace Linq
             Visit(b.Right);
             _postGreSqlString.Append(")");
             return b;
-        }
-
-        public void PrintSql()
-        {
-            Console.WriteLine(_postGreSqlString.ToString());
         }
 
         public string GetStatement()

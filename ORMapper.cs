@@ -48,12 +48,26 @@ namespace Linq
 
         public void Insert(object obj)
         {
-            _ct.Insert(obj);
+            if (IsTypeATable(obj.GetType()))
+            {
+                _ct.Insert(obj);
+            }
+            else
+            {
+                throw new InvalidOperationException($"{obj.GetType()} is not a valid Table Type, please set correct Attributes");
+            }
         }
 
         public void Delete(object obj)
         {
-            _ct.Delete(obj);
+            if (IsTypeATable(obj.GetType()))
+            {
+                _ct.Delete(obj);
+            }
+            else
+            {
+                throw new InvalidOperationException($"{obj.GetType()} is not a valid Table Type, please set correct Attributes");
+            }
         }
 
         public void SubmitChanges()
@@ -86,6 +100,7 @@ namespace Linq
         private void ExecuteInsert(ChangeTrackerEntry entry)
         {
             _db.Insert(entry.Item);
+
         }
 
         private void ExecuteDelete(ChangeTrackerEntry entry)
@@ -93,7 +108,7 @@ namespace Linq
             _db.Delete(entry.Item);
         }
 
-        private bool IsTypeATable(Type T)
+        public bool IsTypeATable(Type T)
         {
             if (T.GetCustomAttributes(typeof(TableAttribute)).GetEnumerator().MoveNext())
             {

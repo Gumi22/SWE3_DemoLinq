@@ -42,7 +42,9 @@ namespace Linq
                 {
                     foreach (var originalValue in Originals)
                     {
-                        if (!originalValue.Item2.Equals(originalValue.Item1.GetValue(Item)))
+                        if (!originalValue.Item2?.Equals(originalValue.Item1.GetValue(Item)) ??
+                            !originalValue.Item1?.GetValue(Item)?.Equals(originalValue.Item2) ??
+                            !(originalValue.Item2 == null && originalValue.Item1?.GetValue(Item) == null))
                         {
                             State = States.Modified;
                             return;
