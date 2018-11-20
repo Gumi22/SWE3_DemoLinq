@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Collections;
+using System.Data;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Transactions;
+using Npgsql;
 
 namespace Linq
 {
@@ -11,10 +15,14 @@ namespace Linq
     {
         private Expression _expression = null;
         private DemoLinqProvider _provider = null;
-        public DemoLinq()
+        public DemoLinq() : this(new OrMapper())
+        {
+        }
+
+        public DemoLinq(OrMapper orMapper)
         {
             _expression = Expression.Constant(this);
-            _provider = new DemoLinqProvider();
+            _provider = new DemoLinqProvider(orMapper);
         }
 
         internal DemoLinq(DemoLinqProvider provider, Expression expression)
@@ -44,6 +52,13 @@ namespace Linq
 
     internal class DemoLinqProvider : IQueryProvider
     {
+        private OrMapper _orMapper;
+
+        public DemoLinqProvider(OrMapper orMapper)
+        {
+            _orMapper = orMapper;
+        }
+
         public IQueryable CreateQuery(Expression expression)
         {
             throw new NotImplementedException();
@@ -68,33 +83,13 @@ namespace Linq
 
         internal IEnumerator<T> GetEnumerator<T>(Expression expression)
         {
-            // Returns a enumeration (ToList, ToArray, foreach, ...)
-            var visitor = new PostGreSQLExpressionTreeVisitor();
-            visitor.Visit(expression);
-
-            Console.Write("SELECT ");
-
-            //Select * but with names:
-            foreach(var x in visitor.SourceType.GetProperties())
-            {
-                Console.Write($"{visitor.SourceType.Name}.{x.Name}, ");
-            }
-
-            //from my table
-            Console.Write($"FROM {visitor.SourceType.Name} ");
-
-
-            visitor.printSQL();
-
-            return new MyTable[]
-            {
-                new MyTable() { FirstName = "Peter", Age = 32 },
-                new MyTable() { FirstName = "Anna", Age = 32 },
-                new MyTable() { FirstName = "Marie", Age = 38 },
-            }
-            .OfType<T>()
-            .AsQueryable()
-            .GetEnumerator();
+            return _orMapper.GetEnumerable<T>(expression)
+                .AsQueryable()
+                .GetEnumerator(); ;
         }
+
+        
+
+
     }
 }

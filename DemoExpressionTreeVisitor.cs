@@ -7,7 +7,7 @@ namespace Linq
 {
     public class DemoExpressionTreeVisitor : ExpressionTreeVisitor
     {
-        private Type TableType;
+        private Type _tableType;
 
         public override Expression Visit(Expression e)
         {
@@ -27,13 +27,13 @@ namespace Linq
                 if(t.GetGenericTypeDefinition() == typeof(DemoLinq<>))
                 {
                     var tt = t.GenericTypeArguments[0];
-                    if(tt != TableType && TableType != null)
+                    if(tt != _tableType && _tableType != null)
                     {
                         throw new InvalidOperationException("Mixing tables not allowed");
                     }
                     else
                     {
-                        this.TableType = tt;
+                        this._tableType = tt;
                     }
                 }
             }

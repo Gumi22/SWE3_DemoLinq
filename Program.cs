@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Npgsql;
 
 namespace Linq
 {
@@ -7,21 +8,29 @@ namespace Linq
     {
         static void Main(string[] args)
         {
-            var qry = new DemoLinq<MyTable>();
+            OrMapper orm = new OrMapper(new PostGreSqlDatabase());
 
-            int x = 18;
+            //ToDo: Get some values from OR Mapper with query.
+
+            //ToDo: Change these Values.
+
+            //ToDo: Save dif to database.
+
+
+
+            //Testing: 
+
+            var qry = orm.GetQuery<Photographer>();
+            var qry2 = orm.GetQuery<ChangeTrackerEntry>();
 
             var filtered = qry
-                .Where(i => i.Age > x && i.Age < 40)
-                .Where(i => i.FirstName == "Peter")
-                .Where(i => i.Age < 10)
-                .Where(i => i.FirstName == "Pwereeter");
+                .Where(i => i.Id <= 3);
 
             var lst = filtered.ToList();
 
             foreach(var i in lst)
             {
-                Console.WriteLine(i);
+                Console.WriteLine($"{i.Id}, {i.Name}, {i.SurName}, {i.BirthDate}, {i.Notes}");
             }
 
             Console.ReadKey();

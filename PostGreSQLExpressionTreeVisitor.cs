@@ -6,9 +6,10 @@ using System.Text;
 
 namespace Linq
 {
-    class PostGreSQLExpressionTreeVisitor : ExpressionTreeVisitor
+    class PostGreSqlExpressionTreeVisitor : ExpressionTreeVisitor
     {
-        private StringBuilder _postGreSQLString = new StringBuilder();
+        private StringBuilder _postGreSqlString = new StringBuilder();
+        private bool _firstWhereVisited = false;
 
         public Type SourceType { get; private set; }
 
@@ -20,8 +21,17 @@ namespace Linq
         //.Where, .Select usw usw
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
+            string append = "";
             if (m.Method.Name == "Where")
             {
+                
+                if (m.Method.DeclaringType == typeof(Queryable) && _firstWhereVisited && m.Arguments[0].NodeType == ExpressionType.Call)
+                {
+                    append = " AND ";
+                }
+
+                _firstWhereVisited = true;
+                
                 if (m.Arguments[0].NodeType == ExpressionType.Constant)
                 {
                     var ce = (ConstantExpression)m.Arguments[0];
@@ -38,24 +48,20 @@ namespace Linq
                             this.SourceType = tt;
                         }
                     }
-                _postGreSQLString.Append("WHERE ");
+                _postGreSqlString.Append("WHERE ");
                 }
             }
-            Console.WriteLine(m.Method.Name);
-            return base.VisitMethodCall(m);
+            Expression x = base.VisitMethodCall(m);
+            _postGreSqlString.Append(append);
+            return x;
         }
-
 
         protected override Expression VisitLambda(LambdaExpression lambda)
         {
-            if (lambda.Body.NodeType == ExpressionType.Equal)
-            {
-                _postGreSQLString.Append(" AND ");
-            }
             Expression x = base.VisitLambda(lambda);
             if (lambda.Body.NodeType == ExpressionType.AndAlso)
             {
-                _postGreSQLString.Append(" " + NodeTypeToString(lambda.Body.NodeType) + " ");
+                _postGreSqlString.Append(" " + NodeTypeToString(lambda.Body.NodeType) + " ");
             }
             return x;
         }
@@ -63,13 +69,22 @@ namespace Linq
 
         protected override Expression VisitConstant(ConstantExpression c)
         {
-            if (isSemiPrimitiveType(c.Type))
+            Type type = c.Type;
+            if (c.Type.IsGenericType && c.Type.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
-                _postGreSQLString.Append(c.Value);
+                type = c.Type.GetGenericArguments().First();
             }
+            if (type == typeof(int) || type == typeof(bool) || type == typeof(short) || type == typeof(long) || type == typeof(decimal))
+            {
+                _postGreSqlString.Append(c.Value);
+            }
+            if (type == typeof(string)) _postGreSqlString.Append("\'"+c.Value+"\'");
+            if (type == typeof(DateTime)) _postGreSqlString.Append("\'" + ((DateTime)c.Value).Year + "-" + ((DateTime)c.Value).Month + "-" + ((DateTime)c.Value).Day + "\'");
             
             return base.VisitConstant(c);
         }
+
+        
 
         protected override ParameterExpression VisitParameter(ParameterExpression p)
         {
@@ -79,23 +94,38 @@ namespace Linq
         //Es kann sich hier "nur" um eine Spalte oder eine Konstante halten
         protected override Expression VisitMemberAccess(MemberExpression e)
         {
-            _postGreSQLString.Append(e.Member.Name);
+            if (e.Expression.NodeType == ExpressionType.Constant)
+            {
+                var ce = (ConstantExpression) e.Expression;
+                var fi = ce.Type.GetField(e.Member.Name);
+                _postGreSqlString.Append(fi.GetValue(ce.Value));
+
+            }
+            else
+            {
+                _postGreSqlString.Append(SourceType.Name.ToLower() + "." +  e.Member.Name.ToLower());
+            }
             return base.VisitMemberAccess(e);
         }
 
         protected override Expression VisitBinary(BinaryExpression b)
         {
-            _postGreSQLString.Append("(");
+            _postGreSqlString.Append("(");
             Visit(b.Left);
-            _postGreSQLString.Append($" {NodeTypeToString(b.NodeType)} ");
+            _postGreSqlString.Append($" {NodeTypeToString(b.NodeType)} ");
             Visit(b.Right);
-            _postGreSQLString.Append(")");
+            _postGreSqlString.Append(")");
             return b;
         }
 
-        public void printSQL()
+        public void PrintSql()
         {
-            Console.WriteLine(_postGreSQLString.ToString());
+            Console.WriteLine(_postGreSqlString.ToString());
+        }
+
+        public string GetStatement()
+        {
+            return _postGreSqlString.ToString();
         }
 
         private String NodeTypeToString (ExpressionType e)
@@ -129,28 +159,6 @@ namespace Linq
             return "InvalidNodeTypeToString";
         }
 
-        private string Member(string member)
-        {
-            //ToDo: Performance verbessern:
-            return SourceType.Name + "." +  member;
-        }
-
-        private bool isSemiPrimitiveType(Type type)
-        {
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-            {
-                type = type.GetGenericArguments().First();
-            }
-            if (type == typeof(int)) return true;
-            if (type == typeof(bool)) return true;
-            if (type == typeof(short)) return true;
-            if (type == typeof(long)) return true;
-            if (type == typeof(decimal)) return true;
-            if (type == typeof(string)) return true;
-            if (type == typeof(DateTime)) return true;
-
-            return false;
-        }
     }
 }
 
