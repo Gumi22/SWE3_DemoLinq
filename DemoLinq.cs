@@ -39,20 +39,18 @@ namespace Linq
 
         public IEnumerator<T> GetEnumerator()
         {
-            // Returns a enumeration (ToList, ToArray, foreach, ...)
             return _provider.GetEnumerator<T>(_expression);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            // Returns a enumeration (ToList, ToArray, foreach, ...)
             return _provider.GetEnumerator<T>(_expression);
         }
     }
 
     internal class DemoLinqProvider : IQueryProvider
     {
-        private OrMapper _orMapper;
+        private readonly OrMapper _orMapper;
 
         public DemoLinqProvider(OrMapper orMapper)
         {
@@ -85,7 +83,7 @@ namespace Linq
         {
             return _orMapper.GetEnumerable<T>(expression)
                 .AsQueryable()
-                .GetEnumerator(); ;
+                .GetEnumerator();
         }
 
         

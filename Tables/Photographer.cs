@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using Linq.Attributes;
 
-namespace Linq
+namespace Linq.Tables
 {
     [Table("photographer")]
-    class Photographer
+    public class Photographer
     {
         [PrimaryKey, Column("id")]
         public int Id { get; set; }

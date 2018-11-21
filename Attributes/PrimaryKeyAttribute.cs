@@ -7,8 +7,11 @@ namespace Linq.Attributes
 {
     class PrimaryKeyAttribute : Attribute
     {
-        //ToDo add options for composite PK
-        public PrimaryKeyAttribute()
-        {}
+        public string Name { get; set; }
+
+        public PrimaryKeyAttribute([CallerMemberName]string name = "")
+        {
+            this.Name = name;
+        }
     }
 }

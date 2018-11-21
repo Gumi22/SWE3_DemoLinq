@@ -9,28 +9,48 @@ using Npgsql;
 
 namespace Linq
 {
-    class PostGreSqlDatabase : IDatabase
+    public class PostGreSqlDatabase : IDatabase
     {
         private readonly string _connectionString = "";
         private readonly PostGreSqlExpressionTreeVisitor _visitor = null;
+
         public PostGreSqlDatabase(string connection = "Server=127.0.0.1; Port=5432; User Id=postgres; Password=postgres; Database=imgDB")
         {
             _connectionString = connection;
             _visitor = new PostGreSqlExpressionTreeVisitor();
         }
 
+        public PostGreSqlDatabase(PostGreSqlExpressionTreeVisitor visitor, string connection = "Server=127.0.0.1; Port=5432; User Id=postgres; Password=postgres; Database=imgDB")
+        {
+            _connectionString = connection;
+            _visitor = visitor;
+        }
+
+        /// <summary>
+        /// Converts an expression into a PostGreSql select statement, executes it against the database
+        /// and returns the Result as an enumerable
+        /// </summary>
+        /// <typeparam name="T">the Table Type</typeparam>
+        /// <param name="expression">A valid Linq expression without joins or complicated things</param>
+        /// <returns></returns>
         public IEnumerable<T> Select<T>(Expression expression)
         {
             return ExecuteSelect<T>(BuildSqlSelectString(expression));
         }
 
+        /// <summary>
+        /// Builds a PostGreSql insert statement and inserts the object into the database
+        /// </summary>
+        /// <typeparam name="T">the Table Type</typeparam>
+        /// <param name="newObject">the objects that is to be inserted</param>
+        /// <returns>the id of the newly inserted object</returns>
         public int Insert<T>(T newObject)
         {
             int id = ExecuteInsert(BuildSqlInsertString(newObject));
 
             foreach (var prop in newObject.GetType().GetProperties())
             {
-                foreach (var pkAttrib in prop.GetCustomAttributes(typeof(PrimaryKeyAttribute)))
+                foreach (var unused in prop.GetCustomAttributes(typeof(PrimaryKeyAttribute)))
                 {
                     prop.SetValue(newObject, id);
                 }
@@ -39,16 +59,28 @@ namespace Linq
             return id;
         }
 
+        /// <summary>
+        /// Builds a PostGreSql delete statement and deletes the object from the database
+        /// </summary>
+        /// <typeparam name="T">the Table Type</typeparam>
+        /// <param name="deletedObject">the objects that is to be deleted</param>
         public void Delete<T>(T deletedObject)
         {
             ExecuteDelete(BuildSqlDeleteString(deletedObject));
         }
 
+        /// <summary>
+        /// Builds a PostGreSql update statement and updates the object in the database
+        /// </summary>
+        /// <typeparam name="T">the Table Type</typeparam>
+        /// <param name="changedObject">the objects that is to be updated</param>
         public void Update<T>(T changedObject)
         {
             ExecuteUpdate(BuildSqlUpdateString(changedObject));
         }
 
+
+        //ToDo: Refactor the stringbuilder methods with possibly new Class that gets attributes and values and so on.
         private string BuildSqlSelectString(Expression ex)
         {
             _visitor.Visit(ex);

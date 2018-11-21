@@ -5,14 +5,16 @@ using System.Text;
 
 namespace Linq
 {
-    class ChangeTracker
+    public class ChangeTracker : IChangeTracker
     {
         private static readonly List<ChangeTrackerEntry> _objects = new List<ChangeTrackerEntry>();
 
-        public ChangeTracker()
-        {
-        }
-
+        /// <summary>
+        /// Detects Objects that have been modified, added, or deleted
+        /// and compiles them into a new List
+        /// ComputeChanges should be called after this
+        /// </summary>
+        /// <returns>A list of ChangeTrackerEntries that were inserted, modified, or deleted</returns>
         public List<ChangeTrackerEntry> DetectChanges()
         {
             List<ChangeTrackerEntry> changed = new List<ChangeTrackerEntry>();
@@ -29,6 +31,10 @@ namespace Linq
             return changed;
         }
 
+        /// <summary>
+        /// Inserts an object to be tracked
+        /// </summary>
+        /// <param name="obj">the objects that should be inserted (must be Object with Table attribute)</param>
         public void Insert(object obj)
         {
             if (obj != null)
@@ -38,14 +44,23 @@ namespace Linq
             }
         }
 
+        /// <summary>
+        /// Marks an object as deleted, but doesn't delete the object itself
+        /// </summary>
+        /// <param name="obj">object that should be marked as deleted</param>
         public void Delete(object obj)
-        {
+        { 
+            //ToDo: if references to this Object are set, delete them also? evtl. new Parameter("cascade")
             if (obj != null)
             {
                 _objects.Find(x => x.Item.Equals(obj)).State = ChangeTrackerEntry.States.Deleted;
             }
         }
 
+        /// <summary>
+        /// Inserts an object into the List of tracked objects and marks it as unmodified
+        /// </summary>
+        /// <param name="obj">object that should be tracked</param>
         public void Track(object obj)
         {
             if (obj != null)
@@ -55,6 +70,9 @@ namespace Linq
             }
         }
 
+        /// <summary>
+        /// resolves the status to delete deleted objects, and update the other ones.
+        /// </summary>
         public void ComputeChanges()
         {
             var toBeDeleted = new List<ChangeTrackerEntry>();
@@ -63,10 +81,10 @@ namespace Linq
                 switch (obj.State)
                 {
                     case ChangeTrackerEntry.States.Modified:
-                        ComputeUpdate(obj);
+                        obj.SetUnmodified();
                         break;
                     case ChangeTrackerEntry.States.Added:
-                        ComputeInsert(obj);
+                        obj.SetUnmodified();
                         break;
                     case ChangeTrackerEntry.States.Deleted:
                         toBeDeleted.Add(obj);
@@ -80,18 +98,9 @@ namespace Linq
             }
         }
 
-        private void ComputeUpdate(ChangeTrackerEntry entry)
+        public void Clear()
         {
-            foreach (var originalValue in entry.Originals)
-            {
-                originalValue.Item2 = originalValue.Item1.GetValue(entry.Item);
-            }
-            entry.State = ChangeTrackerEntry.States.Unmodified;
-        }
-
-        private void ComputeInsert(ChangeTrackerEntry entry)
-        {
-            ComputeUpdate(entry);
+            _objects.Clear();
         }
     }
 }

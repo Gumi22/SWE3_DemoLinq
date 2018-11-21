@@ -5,63 +5,87 @@ using System.Text;
 
 namespace Linq
 {
-    class ChangeTrackerEntry
+    public class ChangeTrackerEntry
     {
-
+        /// <summary>
+        /// The current state ob this entry
+        /// </summary>
         public States State { get; set; }
 
+        /// <summary>
+        /// the item for which this entry is tracking the changes
+        /// </summary>
         public object Item { get; set; }
 
+        /// <summary>
+        /// A list of the Members of the object and the value that were stored
+        /// </summary>
         public List<Pair<PropertyInfo, object>> Originals { get; set; }
 
-        public ChangeTrackerEntry(){}
+        public ChangeTrackerEntry(object obj) : this(obj, States.Unmodified)
+        {
+        }
 
-        public ChangeTrackerEntry(object obj) : this(obj, States.Unmodified){}
-
+        /// <summary>
+        /// creates new ChangeTrackerEntry with given values
+        /// </summary>
+        /// <param name="obj">The object to be tracked</param>
+        /// <param name="state">the state in which it is initially in</param>
         public ChangeTrackerEntry(object obj, States state)
         {
-            Item = obj;
+            Item = obj ?? throw new ArgumentNullException(nameof(obj), "Cannot track changes of null object");
             Originals = new List<Pair<PropertyInfo, object>>();
-            foreach (var x in obj.GetType().GetProperties())
+
+            //ToDo: Use Helper class for these things
+            foreach (var x in obj.GetType().GetProperties()) 
             {
                 Originals.Add(new Pair<PropertyInfo, object>(x, x.GetValue(obj)));
+            }
+
+            if (Originals.Count == 0)
+            {
+                throw new ArgumentNullException(nameof(obj), "Cannot track changes of object without properties");
             }
 
             State = state;
         }
 
+        /// <summary>
+        /// checks values and sets the state of this Entry
+        /// </summary>
         public void ComputeState()
         {
-            if (State == States.Deleted || State == States.Added) //if deleted or added, don't change state
+            if (State == States.Deleted || State == States.Added)
             {
+                //if deleted or added, don't change state
                 return;
             }
-            if (Item != null)
+
+            foreach (var originalValue in Originals)
             {
-                if (Originals.Count > 0)
+                if (!originalValue.Item2?.Equals(originalValue.Item1.GetValue(Item)) ??
+                    !originalValue.Item1?.GetValue(Item)?.Equals(originalValue.Item2) ??
+                    !(originalValue.Item2 == null && originalValue.Item1?.GetValue(Item) == null))
                 {
-                    foreach (var originalValue in Originals)
-                    {
-                        if (!originalValue.Item2?.Equals(originalValue.Item1.GetValue(Item)) ??
-                            !originalValue.Item1?.GetValue(Item)?.Equals(originalValue.Item2) ??
-                            !(originalValue.Item2 == null && originalValue.Item1?.GetValue(Item) == null))
-                        {
-                            State = States.Modified;
-                            return;
-                        }
-                    }
-                    return;
-                }
-                else
-                {
-                    State = States.Added;
+                    State = States.Modified;
                     return;
                 }
             }
-            State = States.Deleted;
-            return;
         }
 
+        public void SetUnmodified()
+        {
+            foreach (var originalValue in Originals)
+            {
+                originalValue.Item2 = originalValue.Item1.GetValue(Item);
+            }
+
+            State = States.Unmodified;
+        }
+
+        /// <summary>
+        /// States that an Table-Object can have
+        /// </summary>
         public enum States
         {
             Unmodified = 0,
@@ -69,10 +93,14 @@ namespace Linq
             Added,
             Deleted
         }
+
+        /// <summary>
+        /// Represents Pair of Values, that may be changed anytime
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="T2"></typeparam>
         public class Pair<T1, T2>
         {
-            public Pair() { }
-
             public Pair(T1 item1, T2 item2)
             {
                 Item1 = item1;

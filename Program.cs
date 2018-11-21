@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Linq.Tables;
 using Npgsql;
 
 namespace Linq
@@ -9,7 +10,7 @@ namespace Linq
     {
         static void Main(string[] args)
         {
-            OrMapper orm = new OrMapper(new PostGreSqlDatabase());
+            /*OrMapper orm = new OrMapper();
 
             //Get some values
             var lst = GetListAndPrintPhotographers(orm);
@@ -56,7 +57,7 @@ namespace Linq
             orm.SubmitChanges();
 
             GetListAndPrintPhotographers(orm);
-            Console.WriteLine("------------------------------------------------------------------");
+            Console.WriteLine("------------------------------------------------------------------");*/
 
             Console.ReadKey();
         }

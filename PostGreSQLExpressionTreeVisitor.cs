@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 
 namespace Linq
 {
-    class PostGreSqlExpressionTreeVisitor : ExpressionTreeVisitor
+    public class PostGreSqlExpressionTreeVisitor : ExpressionTreeVisitor
     {
         private readonly StringBuilder _postGreSqlString = new StringBuilder();
         private bool _firstWhereVisited = false;
@@ -69,22 +70,10 @@ namespace Linq
 
         protected override Expression VisitConstant(ConstantExpression c)
         {
-            Type type = c.Type;
-            if (c.Type.IsGenericType && c.Type.GetGenericTypeDefinition() == typeof(Nullable<>))
-            {
-                type = c.Type.GetGenericArguments().First();
-            }
-            if (type == typeof(int) || type == typeof(bool) || type == typeof(short) || type == typeof(long) || type == typeof(decimal))
-            {
-                _postGreSqlString.Append(c.Value);
-            }
-            if (type == typeof(string)) _postGreSqlString.Append("\'"+c.Value+"\'");
-            if (type == typeof(DateTime)) _postGreSqlString.Append("\'" + ((DateTime)c.Value).Year + "-" + ((DateTime)c.Value).Month + "-" + ((DateTime)c.Value).Day + "\'");
-            
+            _postGreSqlString.Append(GetPostGreSqlValue(c.Type, c.Value));
+
             return base.VisitConstant(c);
         }
-
-        
 
         protected override ParameterExpression VisitParameter(ParameterExpression p)
         {
@@ -92,21 +81,51 @@ namespace Linq
         }
 
         //Es kann sich hier "nur" um eine Spalte oder eine Konstante halten
-        protected override Expression VisitMemberAccess(MemberExpression e)
+        protected override Expression VisitMemberAccess(MemberExpression m)
         {
-            if (e.Expression.NodeType == ExpressionType.Constant)
+            if (m.Expression.NodeType == ExpressionType.Constant || m.Expression.NodeType == ExpressionType.MemberAccess)
             {
-                var ce = (ConstantExpression) e.Expression;
-                var fi = ce.Type.GetField(e.Member.Name);
-                _postGreSqlString.Append(fi.GetValue(ce.Value));
+                object value;
+                var ce = (ConstantExpression)Visit(m.Expression);
+
+                if (m.Type.IsPrimitive || m.Type == typeof(string) || m.Type == typeof(DateTime))
+                {
+                    var fi = m.Member.DeclaringType.GetField(m.Member.Name);
+                    var pi = m.Member.DeclaringType.GetProperty(m.Member.Name);
+                    if (fi != null)
+                    {
+                        _postGreSqlString.Append(GetPostGreSqlValue(m.Type, fi.GetValue(ce.Value)));
+                        value = fi.GetValue(ce.Value);
+                    }
+                    else if (pi != null)
+                    {
+                        _postGreSqlString.Append(GetPostGreSqlValue(m.Type, pi.GetValue(ce.Value)));
+                        value = pi.GetValue(ce.Value);
+                    }
+                    else throw new NotSupportedException();
+                }
+                else if (m.Member.MemberType == MemberTypes.Field)
+                {
+                    value = GetFieldValue(Expression.MakeMemberAccess(ce, m.Member));
+                }
+                else if (m.Member.MemberType == MemberTypes.Property)
+                {
+                    value = GetPropertyValue(Expression.MakeMemberAccess(ce, m.Member));
+                }
+                else
+                {
+                    throw new NotSupportedException();
+                }
+                return Expression.Constant(value, m.Type);
 
             }
             else
             {
-                _postGreSqlString.Append(SourceType.Name.ToLower() + "." +  e.Member.Name.ToLower());
+                _postGreSqlString.Append(SourceType.Name.ToLower() + "." +  m.Member.Name.ToLower());
             }
-            return base.VisitMemberAccess(e);
+            return base.VisitMemberAccess(m);
         }
+        
 
         protected override Expression VisitBinary(BinaryExpression b)
         {
@@ -118,9 +137,18 @@ namespace Linq
             return b;
         }
 
+        /// <summary>
+        /// before returning the saved string the class resets its values to be ready for the next Expression
+        /// </summary>
+        /// <returns>the Where part of a PostGreSql select statement as a string</returns>
         public string GetStatement()
         {
-            return _postGreSqlString.ToString();
+            //Reset Class and return string
+            string ret = _postGreSqlString.ToString();
+            _postGreSqlString.Clear();
+            _firstWhereVisited = false;
+            SourceType = null;
+            return ret;
         }
 
         private String NodeTypeToString (ExpressionType e)
@@ -152,6 +180,50 @@ namespace Linq
             }
 
             return "InvalidNodeTypeToString";
+        }
+
+        private static object GetFieldValue(MemberExpression node)
+        {
+            var fieldInfo = (FieldInfo)node.Member;
+
+            var instance = (node.Expression == null) ? null : TryEvaluate(node.Expression).Value;
+
+            return fieldInfo.GetValue(instance);
+        }
+
+        private static object GetPropertyValue(MemberExpression node)
+        {
+            var propertyInfo = (PropertyInfo)node.Member;
+
+            var instance = (node.Expression == null) ? null : TryEvaluate(node.Expression).Value;
+
+            return propertyInfo.GetValue(instance, null);
+        }
+
+        private static ConstantExpression TryEvaluate(Expression expression)
+        {
+
+            if (expression.NodeType == ExpressionType.Constant)
+            {
+                return (ConstantExpression)expression;
+            }
+            throw new NotSupportedException();
+
+        }
+
+        private static string GetPostGreSqlValue(Type type, object c)
+        {
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                type = type.GetGenericArguments().First();
+            }
+            if (type == typeof(int) || type == typeof(bool) || type == typeof(short) || type == typeof(long) || type == typeof(decimal))
+            {
+                return c.ToString();
+            }
+            if (type == typeof(string)) return "\'" + c + "\'";
+            if (type == typeof(DateTime)) return "\'" + ((DateTime)c).Year + "-" + ((DateTime)c).Month + "-" + ((DateTime)c).Day + "\'";
+            return "";
         }
 
     }
