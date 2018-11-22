@@ -1,0 +1,17 @@
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\bin\Debug\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\bin\Debug\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\bin\Debug\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\bin\Debug\netcoreapp2.1\UnitTests.deps.json
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\bin\Debug\netcoreapp2.1\UnitTests.runtimeconfig.json
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\bin\Debug\netcoreapp2.1\UnitTests.runtimeconfig.dev.json
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\bin\Debug\netcoreapp2.1\UnitTests.dll
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\bin\Debug\netcoreapp2.1\UnitTests.pdb
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\bin\Debug\netcoreapp2.1\Linq.dll
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\bin\Debug\netcoreapp2.1\Linq.pdb
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\obj\Debug\netcoreapp2.1\UnitTests.csprojAssemblyReference.cache
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\obj\Debug\netcoreapp2.1\UnitTests.csproj.CoreCompileInputs.cache
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\obj\Debug\netcoreapp2.1\UnitTests.AssemblyInfoInputs.cache
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\obj\Debug\netcoreapp2.1\UnitTests.AssemblyInfo.cs
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\obj\Debug\netcoreapp2.1\UnitTests.csproj.CopyComplete
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\obj\Debug\netcoreapp2.1\UnitTests.dll
+E:\FH\5_Semester\SWE3_Software-Engineering-3\Beispiele\UnitTests\obj\Debug\netcoreapp2.1\UnitTests.pdb
