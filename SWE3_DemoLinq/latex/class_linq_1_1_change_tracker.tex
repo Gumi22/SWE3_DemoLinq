@@ -1,0 +1,100 @@
+\hypertarget{class_linq_1_1_change_tracker}{}\section{Linq.\+Change\+Tracker Class Reference}
+\label{class_linq_1_1_change_tracker}\index{Linq.\+Change\+Tracker@{Linq.\+Change\+Tracker}}
+Inheritance diagram for Linq.\+Change\+Tracker\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_linq_1_1_change_tracker}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{class_linq_1_1_change_tracker_entry}{Change\+Tracker\+Entry}} $>$ \mbox{\hyperlink{class_linq_1_1_change_tracker_a2e57cf68dc70deca33a3a9e5e7aa9184}{Detect\+Changes}} ()
+\begin{DoxyCompactList}\small\item\em Detects Objects that have been modified, added, or deleted and compiles them into a new List Compute\+Changes should be called after this \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linq_1_1_change_tracker_aa53380f4a4352608f221ea918815d7c1}{Insert}} (object obj)
+\begin{DoxyCompactList}\small\item\em Inserts an object to be tracked \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linq_1_1_change_tracker_a6d14dc387040af11f769e348a98e77f9}{Delete}} (object obj)
+\begin{DoxyCompactList}\small\item\em Marks an object as deleted, but doesn\textquotesingle{}t delete the object itself \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linq_1_1_change_tracker_ab0d470a3095ae5a0a7ae80fbfdcf614b}{Track}} (object obj)
+\begin{DoxyCompactList}\small\item\em Inserts an object into the List of tracked objects and marks it as unmodified \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linq_1_1_change_tracker_a8274e4dca2ddc943c748deaca6e6a0a0}{Compute\+Changes}} ()
+\begin{DoxyCompactList}\small\item\em resolves the status to delete deleted objects, and update the other ones. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_a45301c9a0a9e32e1183039375b3957bd}\label{class_linq_1_1_change_tracker_a45301c9a0a9e32e1183039375b3957bd}} 
+void {\bfseries Clear} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_a8274e4dca2ddc943c748deaca6e6a0a0}\label{class_linq_1_1_change_tracker_a8274e4dca2ddc943c748deaca6e6a0a0}} 
+\index{Linq\+::\+Change\+Tracker@{Linq\+::\+Change\+Tracker}!Compute\+Changes@{Compute\+Changes}}
+\index{Compute\+Changes@{Compute\+Changes}!Linq\+::\+Change\+Tracker@{Linq\+::\+Change\+Tracker}}
+\subsubsection{\texorpdfstring{Compute\+Changes()}{ComputeChanges()}}
+{\footnotesize\ttfamily void Linq.\+Change\+Tracker.\+Compute\+Changes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+resolves the status to delete deleted objects, and update the other ones. 
+
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_a6d14dc387040af11f769e348a98e77f9}\label{class_linq_1_1_change_tracker_a6d14dc387040af11f769e348a98e77f9}} 
+\index{Linq\+::\+Change\+Tracker@{Linq\+::\+Change\+Tracker}!Delete@{Delete}}
+\index{Delete@{Delete}!Linq\+::\+Change\+Tracker@{Linq\+::\+Change\+Tracker}}
+\subsubsection{\texorpdfstring{Delete()}{Delete()}}
+{\footnotesize\ttfamily void Linq.\+Change\+Tracker.\+Delete (\begin{DoxyParamCaption}\item[{object}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Marks an object as deleted, but doesn\textquotesingle{}t delete the object itself 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & object that should be marked as deleted\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_a2e57cf68dc70deca33a3a9e5e7aa9184}\label{class_linq_1_1_change_tracker_a2e57cf68dc70deca33a3a9e5e7aa9184}} 
+\index{Linq\+::\+Change\+Tracker@{Linq\+::\+Change\+Tracker}!Detect\+Changes@{Detect\+Changes}}
+\index{Detect\+Changes@{Detect\+Changes}!Linq\+::\+Change\+Tracker@{Linq\+::\+Change\+Tracker}}
+\subsubsection{\texorpdfstring{Detect\+Changes()}{DetectChanges()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_linq_1_1_change_tracker_entry}{Change\+Tracker\+Entry}}$>$ Linq.\+Change\+Tracker.\+Detect\+Changes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Detects Objects that have been modified, added, or deleted and compiles them into a new List Compute\+Changes should be called after this 
+
+\begin{DoxyReturn}{Returns}
+A list of Change\+Tracker\+Entries that were inserted, modified, or deleted
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_aa53380f4a4352608f221ea918815d7c1}\label{class_linq_1_1_change_tracker_aa53380f4a4352608f221ea918815d7c1}} 
+\index{Linq\+::\+Change\+Tracker@{Linq\+::\+Change\+Tracker}!Insert@{Insert}}
+\index{Insert@{Insert}!Linq\+::\+Change\+Tracker@{Linq\+::\+Change\+Tracker}}
+\subsubsection{\texorpdfstring{Insert()}{Insert()}}
+{\footnotesize\ttfamily void Linq.\+Change\+Tracker.\+Insert (\begin{DoxyParamCaption}\item[{object}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Inserts an object to be tracked 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & the objects that should be inserted (must be Object with Table attribute)\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_ab0d470a3095ae5a0a7ae80fbfdcf614b}\label{class_linq_1_1_change_tracker_ab0d470a3095ae5a0a7ae80fbfdcf614b}} 
+\index{Linq\+::\+Change\+Tracker@{Linq\+::\+Change\+Tracker}!Track@{Track}}
+\index{Track@{Track}!Linq\+::\+Change\+Tracker@{Linq\+::\+Change\+Tracker}}
+\subsubsection{\texorpdfstring{Track()}{Track()}}
+{\footnotesize\ttfamily void Linq.\+Change\+Tracker.\+Track (\begin{DoxyParamCaption}\item[{object}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Inserts an object into the List of tracked objects and marks it as unmodified 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & object that should be tracked\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Change\+Tracker.\+cs\end{DoxyCompactItemize}

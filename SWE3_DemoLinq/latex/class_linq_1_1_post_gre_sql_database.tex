@@ -1,0 +1,119 @@
+\hypertarget{class_linq_1_1_post_gre_sql_database}{}\section{Linq.\+Post\+Gre\+Sql\+Database Class Reference}
+\label{class_linq_1_1_post_gre_sql_database}\index{Linq.\+Post\+Gre\+Sql\+Database@{Linq.\+Post\+Gre\+Sql\+Database}}
+Inheritance diagram for Linq.\+Post\+Gre\+Sql\+Database\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_linq_1_1_post_gre_sql_database}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_database_ad038ef5510672f2e719e5d634ee48abd}\label{class_linq_1_1_post_gre_sql_database_ad038ef5510672f2e719e5d634ee48abd}} 
+{\bfseries Post\+Gre\+Sql\+Database} (string connection=\char`\"{}Server=127.\+0.\+0.\+1; Port=5432; User Id=postgres; Password=postgres; Database=img\+DB\char`\"{})
+\item 
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_database_a575c670d7f67ec03a9336ed3cc64cbad}\label{class_linq_1_1_post_gre_sql_database_a575c670d7f67ec03a9336ed3cc64cbad}} 
+{\bfseries Post\+Gre\+Sql\+Database} (\mbox{\hyperlink{class_linq_1_1_post_gre_sql_expression_tree_visitor}{Post\+Gre\+Sql\+Expression\+Tree\+Visitor}} visitor, string connection=\char`\"{}Server=127.\+0.\+0.\+1; Port=5432; User Id=postgres; Password=postgres; Database=img\+DB\char`\"{})
+\item 
+I\+Enumerable$<$ T $>$ \mbox{\hyperlink{class_linq_1_1_post_gre_sql_database_abffcc78b1162e9b4b8bce35118edafca}{Select$<$ T $>$}} (Expression expression)
+\begin{DoxyCompactList}\small\item\em Converts an expression into a Post\+Gre\+Sql select statement, executes it against the database and returns the Result as an enumerable \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_linq_1_1_post_gre_sql_database_ab1e6bff4c4de2da6b6173c95761929c7}{Insert$<$ T $>$}} (T new\+Object)
+\begin{DoxyCompactList}\small\item\em Builds a Post\+Gre\+Sql insert statement and inserts the object into the database \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linq_1_1_post_gre_sql_database_a61c3b22701f6aff3ca6862c2999393cb}{Delete$<$ T $>$}} (T deleted\+Object)
+\begin{DoxyCompactList}\small\item\em Builds a Post\+Gre\+Sql delete statement and deletes the object from the database \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linq_1_1_post_gre_sql_database_a8060f095f8b53fb22409a794bb41279d}{Update$<$ T $>$}} (T changed\+Object)
+\begin{DoxyCompactList}\small\item\em Builds a Post\+Gre\+Sql update statement and updates the object in the database \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_database_a61c3b22701f6aff3ca6862c2999393cb}\label{class_linq_1_1_post_gre_sql_database_a61c3b22701f6aff3ca6862c2999393cb}} 
+\index{Linq\+::\+Post\+Gre\+Sql\+Database@{Linq\+::\+Post\+Gre\+Sql\+Database}!Delete$<$ T $>$@{Delete$<$ T $>$}}
+\index{Delete$<$ T $>$@{Delete$<$ T $>$}!Linq\+::\+Post\+Gre\+Sql\+Database@{Linq\+::\+Post\+Gre\+Sql\+Database}}
+\subsubsection{\texorpdfstring{Delete$<$ T $>$()}{Delete< T >()}}
+{\footnotesize\ttfamily void Linq.\+Post\+Gre\+Sql\+Database.\+Delete$<$ T $>$ (\begin{DoxyParamCaption}\item[{T}]{deleted\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Builds a Post\+Gre\+Sql delete statement and deletes the object from the database 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the Table Type\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em deleted\+Object} & the objects that is to be deleted\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_database_ab1e6bff4c4de2da6b6173c95761929c7}\label{class_linq_1_1_post_gre_sql_database_ab1e6bff4c4de2da6b6173c95761929c7}} 
+\index{Linq\+::\+Post\+Gre\+Sql\+Database@{Linq\+::\+Post\+Gre\+Sql\+Database}!Insert$<$ T $>$@{Insert$<$ T $>$}}
+\index{Insert$<$ T $>$@{Insert$<$ T $>$}!Linq\+::\+Post\+Gre\+Sql\+Database@{Linq\+::\+Post\+Gre\+Sql\+Database}}
+\subsubsection{\texorpdfstring{Insert$<$ T $>$()}{Insert< T >()}}
+{\footnotesize\ttfamily int Linq.\+Post\+Gre\+Sql\+Database.\+Insert$<$ T $>$ (\begin{DoxyParamCaption}\item[{T}]{new\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Builds a Post\+Gre\+Sql insert statement and inserts the object into the database 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the Table Type\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Object} & the objects that is to be inserted\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the id of the newly inserted object
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_database_abffcc78b1162e9b4b8bce35118edafca}\label{class_linq_1_1_post_gre_sql_database_abffcc78b1162e9b4b8bce35118edafca}} 
+\index{Linq\+::\+Post\+Gre\+Sql\+Database@{Linq\+::\+Post\+Gre\+Sql\+Database}!Select$<$ T $>$@{Select$<$ T $>$}}
+\index{Select$<$ T $>$@{Select$<$ T $>$}!Linq\+::\+Post\+Gre\+Sql\+Database@{Linq\+::\+Post\+Gre\+Sql\+Database}}
+\subsubsection{\texorpdfstring{Select$<$ T $>$()}{Select< T >()}}
+{\footnotesize\ttfamily I\+Enumerable$<$T$>$ Linq.\+Post\+Gre\+Sql\+Database.\+Select$<$ T $>$ (\begin{DoxyParamCaption}\item[{Expression}]{expression }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts an expression into a Post\+Gre\+Sql select statement, executes it against the database and returns the Result as an enumerable 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the Table Type\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em expression} & A valid \mbox{\hyperlink{namespace_linq}{Linq}} expression without joins or complicated things\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_database_a8060f095f8b53fb22409a794bb41279d}\label{class_linq_1_1_post_gre_sql_database_a8060f095f8b53fb22409a794bb41279d}} 
+\index{Linq\+::\+Post\+Gre\+Sql\+Database@{Linq\+::\+Post\+Gre\+Sql\+Database}!Update$<$ T $>$@{Update$<$ T $>$}}
+\index{Update$<$ T $>$@{Update$<$ T $>$}!Linq\+::\+Post\+Gre\+Sql\+Database@{Linq\+::\+Post\+Gre\+Sql\+Database}}
+\subsubsection{\texorpdfstring{Update$<$ T $>$()}{Update< T >()}}
+{\footnotesize\ttfamily void Linq.\+Post\+Gre\+Sql\+Database.\+Update$<$ T $>$ (\begin{DoxyParamCaption}\item[{T}]{changed\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Builds a Post\+Gre\+Sql update statement and updates the object in the database 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the Table Type\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em changed\+Object} & the objects that is to be updated\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Postgresql\+Database.\+cs\end{DoxyCompactItemize}

@@ -1,0 +1,127 @@
+\hypertarget{class_linq_1_1_or_mapper}{}\section{Linq.\+Or\+Mapper Class Reference}
+\label{class_linq_1_1_or_mapper}\index{Linq.\+Or\+Mapper@{Linq.\+Or\+Mapper}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_linq_1_1_or_mapper_af7c792c7adaaa4dc9bddb28a6b76510e}\label{class_linq_1_1_or_mapper_af7c792c7adaaa4dc9bddb28a6b76510e}} 
+{\bfseries Or\+Mapper} (I\+Database db, I\+Change\+Tracker ct)
+\item 
+I\+Queryable$<$ T $>$ \mbox{\hyperlink{class_linq_1_1_or_mapper_a61b69ea249addd0ee7c4a3e9e69022ab}{Get\+Query$<$ T $>$}} ()
+\begin{DoxyCompactList}\small\item\em Gets a queryable Object (\mbox{\hyperlink{class_linq_1_1_demo_linq}{Demo\+Linq}}) \end{DoxyCompactList}\item 
+I\+Enumerable$<$ T $>$ \mbox{\hyperlink{class_linq_1_1_or_mapper_a1bdf8dd049f5bbe6f4b89c22b729f4fd}{Get\+Enumerable$<$ T $>$}} (Expression expression)
+\begin{DoxyCompactList}\small\item\em Executes a Select statement defined by the expression on a database and returns the results \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linq_1_1_or_mapper_a77fcb2b43afdc48a72f6356fc063a8c2}{Insert}} (object obj)
+\begin{DoxyCompactList}\small\item\em Inserts an object into the database \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linq_1_1_or_mapper_a0a5f2100a6da15713a55ed3d972b8434}{Delete}} (object obj)
+\begin{DoxyCompactList}\small\item\em Deletes an object fro the database. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linq_1_1_or_mapper_a447b6b90b25be80634149e945c686461}{Submit\+Changes}} ()
+\begin{DoxyCompactList}\small\item\em Actually Submits the cached changes into the database all at once. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_linq_1_1_or_mapper_a9fb4865eedaba32daf32f65874779a60}{Is\+Type\+A\+Table}} (Type T)
+\begin{DoxyCompactList}\small\item\em Checks if Type is a valid type, that can be copied to the Database \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_linq_1_1_or_mapper_a0a5f2100a6da15713a55ed3d972b8434}\label{class_linq_1_1_or_mapper_a0a5f2100a6da15713a55ed3d972b8434}} 
+\index{Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}!Delete@{Delete}}
+\index{Delete@{Delete}!Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}}
+\subsubsection{\texorpdfstring{Delete()}{Delete()}}
+{\footnotesize\ttfamily void Linq.\+Or\+Mapper.\+Delete (\begin{DoxyParamCaption}\item[{object}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Deletes an object fro the database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & an valid table type object that should be stored in db\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_linq_1_1_or_mapper_a1bdf8dd049f5bbe6f4b89c22b729f4fd}\label{class_linq_1_1_or_mapper_a1bdf8dd049f5bbe6f4b89c22b729f4fd}} 
+\index{Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}!Get\+Enumerable$<$ T $>$@{Get\+Enumerable$<$ T $>$}}
+\index{Get\+Enumerable$<$ T $>$@{Get\+Enumerable$<$ T $>$}!Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}}
+\subsubsection{\texorpdfstring{Get\+Enumerable$<$ T $>$()}{GetEnumerable< T >()}}
+{\footnotesize\ttfamily I\+Enumerable$<$T$>$ Linq.\+Or\+Mapper.\+Get\+Enumerable$<$ T $>$ (\begin{DoxyParamCaption}\item[{Expression}]{expression }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Executes a Select statement defined by the expression on a database and returns the results 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The Type of the table, must have Table Attribute\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em expression} & A \mbox{\hyperlink{namespace_linq}{Linq}} Expression on a certain Table\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A List of objects of Type T 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_linq_1_1_or_mapper_a61b69ea249addd0ee7c4a3e9e69022ab}\label{class_linq_1_1_or_mapper_a61b69ea249addd0ee7c4a3e9e69022ab}} 
+\index{Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}!Get\+Query$<$ T $>$@{Get\+Query$<$ T $>$}}
+\index{Get\+Query$<$ T $>$@{Get\+Query$<$ T $>$}!Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}}
+\subsubsection{\texorpdfstring{Get\+Query$<$ T $>$()}{GetQuery< T >()}}
+{\footnotesize\ttfamily I\+Queryable$<$T$>$ Linq.\+Or\+Mapper.\+Get\+Query$<$ T $>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a queryable Object (\mbox{\hyperlink{class_linq_1_1_demo_linq}{Demo\+Linq}}) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & A Table Type that is stored in the Database\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A queryable object of Type T
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_linq_1_1_or_mapper_a77fcb2b43afdc48a72f6356fc063a8c2}\label{class_linq_1_1_or_mapper_a77fcb2b43afdc48a72f6356fc063a8c2}} 
+\index{Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}!Insert@{Insert}}
+\index{Insert@{Insert}!Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}}
+\subsubsection{\texorpdfstring{Insert()}{Insert()}}
+{\footnotesize\ttfamily void Linq.\+Or\+Mapper.\+Insert (\begin{DoxyParamCaption}\item[{object}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Inserts an object into the database 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & an valid table type object that should be stored in db\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_linq_1_1_or_mapper_a9fb4865eedaba32daf32f65874779a60}\label{class_linq_1_1_or_mapper_a9fb4865eedaba32daf32f65874779a60}} 
+\index{Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}!Is\+Type\+A\+Table@{Is\+Type\+A\+Table}}
+\index{Is\+Type\+A\+Table@{Is\+Type\+A\+Table}!Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}}
+\subsubsection{\texorpdfstring{Is\+Type\+A\+Table()}{IsTypeATable()}}
+{\footnotesize\ttfamily bool Linq.\+Or\+Mapper.\+Is\+Type\+A\+Table (\begin{DoxyParamCaption}\item[{Type}]{T }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if Type is a valid type, that can be copied to the Database 
+
+
+\begin{DoxyParams}{Parameters}
+{\em T} & Type that should be checked\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if Attributes are set correctly, false if there are missing or no attributes
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_linq_1_1_or_mapper_a447b6b90b25be80634149e945c686461}\label{class_linq_1_1_or_mapper_a447b6b90b25be80634149e945c686461}} 
+\index{Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}!Submit\+Changes@{Submit\+Changes}}
+\index{Submit\+Changes@{Submit\+Changes}!Linq\+::\+Or\+Mapper@{Linq\+::\+Or\+Mapper}}
+\subsubsection{\texorpdfstring{Submit\+Changes()}{SubmitChanges()}}
+{\footnotesize\ttfamily void Linq.\+Or\+Mapper.\+Submit\+Changes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Actually Submits the cached changes into the database all at once. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+O\+R\+Mapper.\+cs\end{DoxyCompactItemize}

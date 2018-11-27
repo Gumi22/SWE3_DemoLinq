@@ -75,8 +75,7 @@ namespace Linq
         /// </summary>
         public void ComputeChanges()
         {
-            var toBeDeleted = new List<ChangeTrackerEntry>();
-            foreach (var obj in _objects)
+            foreach (var obj in _objects.ToArray()) //ToArray is not very performant, for loop from behind would be better
             {
                 switch (obj.State)
                 {
@@ -87,14 +86,9 @@ namespace Linq
                         obj.SetUnmodified();
                         break;
                     case ChangeTrackerEntry.States.Deleted:
-                        toBeDeleted.Add(obj);
+                        _objects.Remove(obj);
                         break;
                 }
-            }
-
-            for (int i = toBeDeleted.Count - 1; i >= 0; i--)
-            {
-                _objects.Remove(toBeDeleted[i]);
             }
         }
 

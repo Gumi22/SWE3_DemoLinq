@@ -3450,10 +3450,11 @@
       ]
     },
     "System.Diagnostics.TraceSource/4.3.0": {
-      "sha512": "VnYp1NxGx8Ww731y2LJ1vpfb/DKVNKEZ8Jsh5SgQTZREL/YpWRArgh9pI8CDLmgHspZmLL697CaLvH85qQpRiw==",
+      "sha512": "PXWAEqWXamctxvdYSlHY+HG0e++cVkg0FwiqtiOZ4Ziy31GD9uab2QAgkuDKUARcCdVq3DfruvdMnPfalEJbNw==",
       "type": "package",
       "path": "system.diagnostics.tracesource/4.3.0",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5481,7 +5482,7 @@
       ]
     },
     "System.Threading.Tasks.Extensions/4.5.0": {
-      "sha512": "xPuXi6WJrAoJIf/7KPtmOIiMkUHQkldNeR/IiQRwkRYezgutxY1K2gWkwenV/ON07bUoFr4Lgh+/0SmEugM+Tg==",
+      "sha512": "cWndlAQKAhHfsS6rZbYEE07HXJI9dPdyMAPOXXnVUO+hm+3G6qneMIqLDesoNBiVAPsKErsUVa2N/FRSKi+SeA==",
       "type": "package",
       "path": "system.threading.tasks.extensions/4.5.0",
       "files": [
@@ -6073,23 +6074,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Thiago\\.nuget\\packages\\": {},
+    "C:\\Users\\thiag\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\FH\\5_Semester\\SWE3_Software-Engineering-3\\Beispiele\\UnitTests\\UnitTests.csproj",
+      "projectUniqueName": "D:\\FH\\5_Semester\\SWE3_Software-Engineering-3\\Beispiele\\SWE3_DemoLinq\\UnitTests\\UnitTests.csproj",
       "projectName": "UnitTests",
-      "projectPath": "E:\\FH\\5_Semester\\SWE3_Software-Engineering-3\\Beispiele\\UnitTests\\UnitTests.csproj",
-      "packagesPath": "C:\\Users\\Thiago\\.nuget\\packages\\",
-      "outputPath": "E:\\FH\\5_Semester\\SWE3_Software-Engineering-3\\Beispiele\\UnitTests\\obj\\",
+      "projectPath": "D:\\FH\\5_Semester\\SWE3_Software-Engineering-3\\Beispiele\\SWE3_DemoLinq\\UnitTests\\UnitTests.csproj",
+      "packagesPath": "C:\\Users\\thiag\\.nuget\\packages\\",
+      "outputPath": "D:\\FH\\5_Semester\\SWE3_Software-Engineering-3\\Beispiele\\SWE3_DemoLinq\\UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Thiago\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\thiag\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6102,8 +6103,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "E:\\FH\\5_Semester\\SWE3_Software-Engineering-3\\Beispiele\\SWE3_DemoLinq\\Linq.csproj": {
-              "projectPath": "E:\\FH\\5_Semester\\SWE3_Software-Engineering-3\\Beispiele\\SWE3_DemoLinq\\Linq.csproj"
+            "D:\\FH\\5_Semester\\SWE3_Software-Engineering-3\\Beispiele\\SWE3_DemoLinq\\SWE3_DemoLinq\\Linq.csproj": {
+              "projectPath": "D:\\FH\\5_Semester\\SWE3_Software-Engineering-3\\Beispiele\\SWE3_DemoLinq\\SWE3_DemoLinq\\Linq.csproj"
             }
           }
         }

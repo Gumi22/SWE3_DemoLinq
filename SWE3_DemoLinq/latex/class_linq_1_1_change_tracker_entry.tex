@@ -1,0 +1,122 @@
+\hypertarget{class_linq_1_1_change_tracker_entry}{}\section{Linq.\+Change\+Tracker\+Entry Class Reference}
+\label{class_linq_1_1_change_tracker_entry}\index{Linq.\+Change\+Tracker\+Entry@{Linq.\+Change\+Tracker\+Entry}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_linq_1_1_change_tracker_entry_1_1_pair}{Pair}}
+\begin{DoxyCompactList}\small\item\em Represents \mbox{\hyperlink{class_linq_1_1_change_tracker_entry_1_1_pair}{Pair}} of Values, that may be changed anytime \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_linq_1_1_change_tracker_entry_aded3f97a3bd1326ae1b264c7618b7828}{States}} \{ {\bfseries Unmodified} = 0, 
+{\bfseries Modified}, 
+{\bfseries Added}, 
+{\bfseries Deleted}
+ \}
+\begin{DoxyCompactList}\small\item\em States that an Table-\/\+Object can have \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_entry_a41acb5b41eb5bf272b026d39fb245895}\label{class_linq_1_1_change_tracker_entry_a41acb5b41eb5bf272b026d39fb245895}} 
+{\bfseries Change\+Tracker\+Entry} (object obj)
+\item 
+\mbox{\hyperlink{class_linq_1_1_change_tracker_entry_a9276ab8cf07caaca4252287401d7e1c6}{Change\+Tracker\+Entry}} (object obj, \mbox{\hyperlink{class_linq_1_1_change_tracker_entry_aded3f97a3bd1326ae1b264c7618b7828}{States}} state)
+\begin{DoxyCompactList}\small\item\em creates new \mbox{\hyperlink{class_linq_1_1_change_tracker_entry}{Change\+Tracker\+Entry}} with given values \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linq_1_1_change_tracker_entry_a7de1eab4061b442ad072961ff18792aa}{Compute\+State}} ()
+\begin{DoxyCompactList}\small\item\em checks values and sets the state of this Entry \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_entry_ab588fdc9b57a0471b33c2a3bcbac2938}\label{class_linq_1_1_change_tracker_entry_ab588fdc9b57a0471b33c2a3bcbac2938}} 
+void {\bfseries Set\+Unmodified} ()
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_linq_1_1_change_tracker_entry_aded3f97a3bd1326ae1b264c7618b7828}{States}} \mbox{\hyperlink{class_linq_1_1_change_tracker_entry_ad24e8722ffd29eccfdcd3a72c97b1957}{State}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The current state ob this entry \end{DoxyCompactList}\item 
+object \mbox{\hyperlink{class_linq_1_1_change_tracker_entry_a9286918528bb182197ebc21d391bbcf2}{Item}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em the item for which this entry is tracking the changes \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_linq_1_1_change_tracker_entry_1_1_pair}{Pair}}$<$ Property\+Info, object $>$ $>$ \mbox{\hyperlink{class_linq_1_1_change_tracker_entry_abb117792a18f0df8424ba7617e317e1e}{Originals}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em A list of the Members of the object and the value that were stored \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_entry_aded3f97a3bd1326ae1b264c7618b7828}\label{class_linq_1_1_change_tracker_entry_aded3f97a3bd1326ae1b264c7618b7828}} 
+\index{Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}!States@{States}}
+\index{States@{States}!Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}}
+\subsubsection{\texorpdfstring{States}{States}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_linq_1_1_change_tracker_entry_aded3f97a3bd1326ae1b264c7618b7828}{Linq.\+Change\+Tracker\+Entry.\+States}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+States that an Table-\/\+Object can have 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_entry_a9276ab8cf07caaca4252287401d7e1c6}\label{class_linq_1_1_change_tracker_entry_a9276ab8cf07caaca4252287401d7e1c6}} 
+\index{Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}!Change\+Tracker\+Entry@{Change\+Tracker\+Entry}}
+\index{Change\+Tracker\+Entry@{Change\+Tracker\+Entry}!Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}}
+\subsubsection{\texorpdfstring{Change\+Tracker\+Entry()}{ChangeTrackerEntry()}}
+{\footnotesize\ttfamily Linq.\+Change\+Tracker\+Entry.\+Change\+Tracker\+Entry (\begin{DoxyParamCaption}\item[{object}]{obj,  }\item[{\mbox{\hyperlink{class_linq_1_1_change_tracker_entry_aded3f97a3bd1326ae1b264c7618b7828}{States}}}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+creates new \mbox{\hyperlink{class_linq_1_1_change_tracker_entry}{Change\+Tracker\+Entry}} with given values 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & The object to be tracked\\
+\hline
+{\em state} & the state in which it is initially in\\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_entry_a7de1eab4061b442ad072961ff18792aa}\label{class_linq_1_1_change_tracker_entry_a7de1eab4061b442ad072961ff18792aa}} 
+\index{Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}!Compute\+State@{Compute\+State}}
+\index{Compute\+State@{Compute\+State}!Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}}
+\subsubsection{\texorpdfstring{Compute\+State()}{ComputeState()}}
+{\footnotesize\ttfamily void Linq.\+Change\+Tracker\+Entry.\+Compute\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+checks values and sets the state of this Entry 
+
+
+
+\subsection{Property Documentation}
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_entry_a9286918528bb182197ebc21d391bbcf2}\label{class_linq_1_1_change_tracker_entry_a9286918528bb182197ebc21d391bbcf2}} 
+\index{Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}!Item@{Item}}
+\index{Item@{Item}!Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}}
+\subsubsection{\texorpdfstring{Item}{Item}}
+{\footnotesize\ttfamily object Linq.\+Change\+Tracker\+Entry.\+Item\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+the item for which this entry is tracking the changes 
+
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_entry_abb117792a18f0df8424ba7617e317e1e}\label{class_linq_1_1_change_tracker_entry_abb117792a18f0df8424ba7617e317e1e}} 
+\index{Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}!Originals@{Originals}}
+\index{Originals@{Originals}!Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}}
+\subsubsection{\texorpdfstring{Originals}{Originals}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_linq_1_1_change_tracker_entry_1_1_pair}{Pair}}$<$Property\+Info, object$>$ $>$ Linq.\+Change\+Tracker\+Entry.\+Originals\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+A list of the Members of the object and the value that were stored 
+
+\mbox{\Hypertarget{class_linq_1_1_change_tracker_entry_ad24e8722ffd29eccfdcd3a72c97b1957}\label{class_linq_1_1_change_tracker_entry_ad24e8722ffd29eccfdcd3a72c97b1957}} 
+\index{Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}!State@{State}}
+\index{State@{State}!Linq\+::\+Change\+Tracker\+Entry@{Linq\+::\+Change\+Tracker\+Entry}}
+\subsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_linq_1_1_change_tracker_entry_aded3f97a3bd1326ae1b264c7618b7828}{States}} Linq.\+Change\+Tracker\+Entry.\+State\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The current state ob this entry 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Change\+Tracker\+Entry.\+cs\end{DoxyCompactItemize}

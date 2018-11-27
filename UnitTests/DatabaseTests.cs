@@ -51,7 +51,6 @@ namespace UnitTests
             //Cleanup
             p.Id = id;
             db.Delete(p);
-
         }
 
         [Fact]

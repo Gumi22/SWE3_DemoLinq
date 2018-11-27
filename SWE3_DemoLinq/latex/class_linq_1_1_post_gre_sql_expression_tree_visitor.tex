@@ -1,0 +1,64 @@
+\hypertarget{class_linq_1_1_post_gre_sql_expression_tree_visitor}{}\section{Linq.\+Post\+Gre\+Sql\+Expression\+Tree\+Visitor Class Reference}
+\label{class_linq_1_1_post_gre_sql_expression_tree_visitor}\index{Linq.\+Post\+Gre\+Sql\+Expression\+Tree\+Visitor@{Linq.\+Post\+Gre\+Sql\+Expression\+Tree\+Visitor}}
+Inheritance diagram for Linq.\+Post\+Gre\+Sql\+Expression\+Tree\+Visitor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_linq_1_1_post_gre_sql_expression_tree_visitor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_expression_tree_visitor_ac89bd93ff590b05411d3637f78f4abd4}\label{class_linq_1_1_post_gre_sql_expression_tree_visitor_ac89bd93ff590b05411d3637f78f4abd4}} 
+override Expression {\bfseries Visit} (Expression e)
+\item 
+string \mbox{\hyperlink{class_linq_1_1_post_gre_sql_expression_tree_visitor_a0f8b065e5a69ee6f610cee03f7a3fc6d}{Get\+Statement}} ()
+\begin{DoxyCompactList}\small\item\em before returning the saved string the class resets its values to be ready for the next Expression \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_expression_tree_visitor_a6a24d5c5316fe2bd9ec99538a6fd657f}\label{class_linq_1_1_post_gre_sql_expression_tree_visitor_a6a24d5c5316fe2bd9ec99538a6fd657f}} 
+override Expression {\bfseries Visit\+Method\+Call} (Method\+Call\+Expression m)
+\item 
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_expression_tree_visitor_aa441c8aabe0df4cd6e6ddeed989cc633}\label{class_linq_1_1_post_gre_sql_expression_tree_visitor_aa441c8aabe0df4cd6e6ddeed989cc633}} 
+override Expression {\bfseries Visit\+Lambda} (Lambda\+Expression lambda)
+\item 
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_expression_tree_visitor_af65b4b608ccecbe6d5a769cf7380a911}\label{class_linq_1_1_post_gre_sql_expression_tree_visitor_af65b4b608ccecbe6d5a769cf7380a911}} 
+override Expression {\bfseries Visit\+Constant} (Constant\+Expression c)
+\item 
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_expression_tree_visitor_ac6fc4590508cd7cf3bf6db6f306c2db9}\label{class_linq_1_1_post_gre_sql_expression_tree_visitor_ac6fc4590508cd7cf3bf6db6f306c2db9}} 
+override Parameter\+Expression {\bfseries Visit\+Parameter} (Parameter\+Expression p)
+\item 
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_expression_tree_visitor_ab9a58f96730dc61df9fa0a138f9aebc9}\label{class_linq_1_1_post_gre_sql_expression_tree_visitor_ab9a58f96730dc61df9fa0a138f9aebc9}} 
+override Expression {\bfseries Visit\+Member\+Access} (Member\+Expression m)
+\item 
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_expression_tree_visitor_aadc30de6c3e08ef754d00bf23903e85b}\label{class_linq_1_1_post_gre_sql_expression_tree_visitor_aadc30de6c3e08ef754d00bf23903e85b}} 
+override Expression {\bfseries Visit\+Binary} (Binary\+Expression b)
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_expression_tree_visitor_ab0296a8f9e29757e1253646102ec37f8}\label{class_linq_1_1_post_gre_sql_expression_tree_visitor_ab0296a8f9e29757e1253646102ec37f8}} 
+Type {\bfseries Source\+Type}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_linq_1_1_post_gre_sql_expression_tree_visitor_a0f8b065e5a69ee6f610cee03f7a3fc6d}\label{class_linq_1_1_post_gre_sql_expression_tree_visitor_a0f8b065e5a69ee6f610cee03f7a3fc6d}} 
+\index{Linq\+::\+Post\+Gre\+Sql\+Expression\+Tree\+Visitor@{Linq\+::\+Post\+Gre\+Sql\+Expression\+Tree\+Visitor}!Get\+Statement@{Get\+Statement}}
+\index{Get\+Statement@{Get\+Statement}!Linq\+::\+Post\+Gre\+Sql\+Expression\+Tree\+Visitor@{Linq\+::\+Post\+Gre\+Sql\+Expression\+Tree\+Visitor}}
+\subsubsection{\texorpdfstring{Get\+Statement()}{GetStatement()}}
+{\footnotesize\ttfamily string Linq.\+Post\+Gre\+Sql\+Expression\+Tree\+Visitor.\+Get\+Statement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+before returning the saved string the class resets its values to be ready for the next Expression 
+
+\begin{DoxyReturn}{Returns}
+the Where part of a Post\+Gre\+Sql select statement as a string
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Post\+Gre\+S\+Q\+L\+Expression\+Tree\+Visitor.\+cs\end{DoxyCompactItemize}
